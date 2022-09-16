@@ -23,11 +23,16 @@ internal class Program
 
         while (dataReader.Read())
         {
-            Out = Out + dataReader.GetValue(0) + " - " + dataReader.GetValue(1) + "\n";
+            for (int i = 0; i < dataReader.FieldCount; i++)
+            {
+                Out += (i == 0 ? "" : " - ") + dataReader.GetValue(i);
+            }
+            Out += "\n";
         }
 
         Console.WriteLine(Out);
-
+        dataReader.Close();
+        command.Dispose();
         cnn.Close();
     }
 }
